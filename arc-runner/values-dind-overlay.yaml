@@ -1,0 +1,5 @@
+# Apply this only after the python/uv runner image smoke test passes.
+# The custom image includes Docker CLI, but Docker builds still need a Docker daemon.
+
+containerMode:
+  type: dind

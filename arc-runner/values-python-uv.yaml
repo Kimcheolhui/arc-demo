@@ -1,0 +1,16 @@
+# Overlay for an existing gha-runner-scale-set Helm release.
+# The image tag should match the Build ARC Runner Image workflow input.
+
+minRunners: 0
+maxRunners: 3
+
+template:
+  spec:
+    # Required if the GHCR package is private.
+    # imagePullSecrets:
+    #   - name: ghcr-pull-secret
+    containers:
+      - name: runner
+        image: ghcr.io/kimcheolhui/arc-demo-arc-runner:py-uv
+        imagePullPolicy: Always
+        command: ["/home/runner/run.sh"]
