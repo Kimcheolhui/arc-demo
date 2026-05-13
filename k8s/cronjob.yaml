@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: arc-demo-cronjob
+spec:
+  schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: print-timestamp
+              image: python:3.11-slim
+              command: ["python", "-c"]
+              args:
+                - |
+                  from datetime import datetime, timezone
+                  print(f"arc-demo cron tick: {datetime.now(timezone.utc).isoformat()}")
